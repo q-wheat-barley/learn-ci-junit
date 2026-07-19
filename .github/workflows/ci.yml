@@ -1,0 +1,44 @@
+# Actionsタブに表示されるワークフロー名
+name: Calculator CI Sample
+
+# このワークフローを実行するイベントを指定する
+# main, developブランチにpushまたはpull_requestイベントが発生した場合に実行
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+# ジョブ(ワークフロー内の処理単位)を定義する
+jobs:
+  # ビルド環境を指定する
+  build:
+    # ビルド環境のOSを指定する: GitHubが提供するUbuntu VMで実行
+    runs-on: ubuntu-latest
+
+    # ステップを定義する
+    steps:
+      # checkout処理を実行する
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Javaのバージョンを指定する
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      # Mavenのビルドを実行する
+      - name: Cache Maven
+        uses: actions/cache@v4
+          with:
+            path: ~/.m2
+            key: maven-${{ hashFiles('**/pom.xml') }}
+      
+      - name: Run Tests
+        run: mvn clean test
