@@ -36,9 +36,9 @@ jobs:
       # Mavenのビルドを実行する
       - name: Cache Maven
         uses: actions/cache@v4
-          with:
-            path: ~/.m2
-            key: maven-${{ hashFiles('**/pom.xml') }}
+        with:
+          path: ~/.m2
+          key: maven-${{ hashFiles('**/pom.xml') }}
       
       - name: Run Tests
         run: mvn clean test
