@@ -17,4 +17,11 @@ public class CalculatorTest {
         int result = calculator.minus(2, 1);
         assert result == 1;
     }
+
+    @Test
+    void 乗算() {
+        Calculator calculator = new Calculator();
+        int result = calculator.multiply(2, 2);
+        assert result == 4;
+    }
 }

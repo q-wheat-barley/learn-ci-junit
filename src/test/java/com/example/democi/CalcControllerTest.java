@@ -46,4 +46,20 @@ public class CalcControllerTest {
                                                 org.springframework.test.web.servlet.result.MockMvcResultMatchers
                                                                 .content().string("1"));
         }
+
+        @Test
+        void 乗算呼び出し() throws Exception {
+
+                when(calculator.multiply(2, 2)).thenReturn(4);
+
+                mockMvc.perform(
+                                org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                                                .get("/multiply/2/2"))
+                                .andExpect(
+                                                org.springframework.test.web.servlet.result.MockMvcResultMatchers
+                                                                .status().isOk())
+                                .andExpect(
+                                                org.springframework.test.web.servlet.result.MockMvcResultMatchers
+                                                                .content().string("4"));
+        }
 }

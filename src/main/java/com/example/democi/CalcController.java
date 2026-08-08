@@ -23,4 +23,8 @@ public class CalcController {
         return calculator.minus(a, b);
     }
 
+    @GetMapping("/multiply/{a}/{b}")
+    public int multiply(@PathVariable int a, @PathVariable int b) {
+        return calculator.multiply(a, b);
+    }
 }
